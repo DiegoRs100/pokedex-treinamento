@@ -1,4 +1,7 @@
-﻿namespace Acerto.Api
+﻿using Acerto.Api.Configurations;
+using Microsoft.Extensions.DependencyInjection;
+
+namespace Acerto.Api
 {
     public class Startup
     {
@@ -16,6 +19,7 @@
             _services.AddControllers();
             _services.AddEndpointsApiExplorer();
             _services.AddSwaggerGen(options => options.EnableAnnotations());
+            _services.AddAutoMapper(GetType().Assembly);
         }
 
         public void ConfigureApplication(IApplicationBuilder app)
