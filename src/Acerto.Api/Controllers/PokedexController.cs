@@ -25,7 +25,7 @@ namespace Acerto.Api.Controllers
         public async Task<IActionResult> AddPokemon([FromBody] PokemonModel model)
         {
             var pokemon = _mapper.Map<Pokemon>(model);
-            var pokemonById = await _pokedexService.AddPokemon(pokemon);
+            var pokemonById = await _pokedexService.AddPokemonAsync(pokemon);
 
             return Created($"{HttpContext.Request.Path}/{pokemonById}", null);
         }
@@ -36,7 +36,7 @@ namespace Acerto.Api.Controllers
         public async Task<IActionResult> UpdatePokemon([FromBody] PokemonModel model)
         {
             var pokemon = _mapper.Map<Pokemon>(model);
-            await _pokedexService.UpdatePokemon(pokemon);
+            await _pokedexService.UpdatePokemonAsync(pokemon);
 
             return NoContent();
         }
@@ -46,7 +46,7 @@ namespace Acerto.Api.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task<IActionResult> DeletePokemon(Guid pokemonId)
         {
-            await _pokedexService.DeletePokemon(pokemonId);
+            await _pokedexService.DeletePokemonAsync(pokemonId);
             return NoContent();
         }
 

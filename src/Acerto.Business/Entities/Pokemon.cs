@@ -1,5 +1,6 @@
 ﻿using Acerto.Business.Core;
 using Acerto.Business.Enums;
+using Acerto.Business.Validations;
 using FluentValidation.Results;
 
 namespace Acerto.Business.Entities
@@ -28,7 +29,7 @@ namespace Acerto.Business.Entities
 
         public override ValidationResult Validate()
         {
-            return new ValidationResult();
+            return new PokemonValidation().Validate(this);
         }
     }
 }

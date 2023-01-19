@@ -4,8 +4,8 @@ namespace Acerto.Business.Services
 {
     public interface IPokedexService
     {
-        Task<Guid?> AddPokemon(Pokemon pokemon);
-        Task UpdatePokemon(Pokemon pokemon);
-        Task DeletePokemon(Guid pokemonId);
+        Task<Guid?> AddPokemonAsync(Pokemon pokemon);
+        Task UpdatePokemonAsync(Pokemon pokemon);
+        Task DeletePokemonAsync(Guid pokemonId);
     }
 }
