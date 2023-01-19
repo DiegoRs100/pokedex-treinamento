@@ -3,11 +3,11 @@ using Acerto.Business.Repositories;
 
 namespace Acerto.Business.Services
 {
-    public class PokemonService : IPokedexService
+    public class PokedexService : IPokedexService
     {
         private readonly IPokemonRepository _pokemonRepository;
 
-        public PokemonService(IPokemonRepository pokemonRepository)
+        public PokedexService(IPokemonRepository pokemonRepository)
         {
             _pokemonRepository = pokemonRepository;
         }
@@ -22,7 +22,7 @@ namespace Acerto.Business.Services
                 return null;
             }
 
-            var registredPokemon = await _pokemonRepository.GetByName(pokemon.Name);
+            var registredPokemon = await _pokemonRepository.GetByNameAsync(pokemon.Name);
 
             if (registredPokemon != null)
             {
@@ -31,17 +31,16 @@ namespace Acerto.Business.Services
             }
 
             await _pokemonRepository.AddAsync(pokemon);
-            // Comitar a operação
 
-            throw new NotImplementedException();
+            return pokemon.Id;
         }
 
-        public Task DeletePokemonAsync(Guid pokemonId)
+        public Task UpdatePokemonAsync(Pokemon pokemon)
         {
             throw new NotImplementedException();
         }
 
-        public Task UpdatePokemonAsync(Pokemon pokemon)
+        public Task DeletePokemonAsync(Guid pokemonId)
         {
             throw new NotImplementedException();
         }
