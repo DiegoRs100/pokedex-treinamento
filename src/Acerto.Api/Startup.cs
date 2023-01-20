@@ -1,4 +1,5 @@
 ﻿using Acerto.Api.Configurations;
+using Acerto.Business.Core.Notifications;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Acerto.Api
@@ -19,6 +20,7 @@ namespace Acerto.Api
             _services.AddControllers();
             _services.AddEndpointsApiExplorer();
             _services.AddSwaggerGen(options => options.EnableAnnotations());
+            _services.AddSmartNotification();
             _services.AddServices();
             _services.AddRepositories();
             _services.AddAutoMapper(GetType().Assembly);
