@@ -19,6 +19,8 @@ namespace Acerto.Api
             _services.AddControllers();
             _services.AddEndpointsApiExplorer();
             _services.AddSwaggerGen(options => options.EnableAnnotations());
+            _services.AddServices();
+            _services.AddRepositories();
             _services.AddAutoMapper(GetType().Assembly);
         }
 

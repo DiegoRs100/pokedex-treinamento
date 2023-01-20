@@ -6,7 +6,7 @@ namespace Acerto.Business.Repositories
     {
         Task AddAsync(Pokemon pokemon);
         void Update(Pokemon pokemon);
-        void Delete(Pokemon pokemon);
+        void Delete(Guid pokemonId);
 
         Task<bool> HasPokemonAsync(Guid pokemonId);
         Task<Pokemon> GetByIdAsync(Guid pokemonId);

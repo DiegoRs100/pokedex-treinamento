@@ -35,14 +35,46 @@ namespace Acerto.Business.Services
             return pokemon.Id;
         }
 
-        public Task UpdatePokemonAsync(Pokemon pokemon)
+        public async Task UpdatePokemonAsync(Pokemon pokemon)
         {
-            throw new NotImplementedException();
+            var validation = pokemon.Validate();
+
+            if (!validation.IsValid)
+            {
+                // Noticar um erro para o meu usuário
+                return;
+            }
+
+            var hasPokemon = await _pokemonRepository.HasPokemonAsync(pokemon.Id);
+
+            if (!hasPokemon)
+            {
+                // Noticar um erro para o meu usuário
+                return;
+            }
+
+            var registredPokemon = await _pokemonRepository.GetByNameAsync(pokemon.Name);
+
+            if (registredPokemon != null && registredPokemon.Id != pokemon.Id)
+            {
+                // Notificar a inconsistência para o meu usuário
+                return;
+            }
+
+            _pokemonRepository.Update(pokemon);
         }
 
-        public Task DeletePokemonAsync(Guid pokemonId)
+        public async Task DeletePokemonAsync(Guid pokemonId)
         {
-            throw new NotImplementedException();
+            var hasPokemon = await _pokemonRepository.HasPokemonAsync(pokemonId);
+
+            if (!hasPokemon)
+            {
+                // Noticar um erro para o meu usuário
+                return;
+            }
+
+            _pokemonRepository.Delete(pokemonId);
         }
     }
 }

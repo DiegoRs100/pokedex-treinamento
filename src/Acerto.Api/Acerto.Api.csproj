@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Acerto.Business\Acerto.Business.csproj" />
+    <ProjectReference Include="..\Acerto.Infra\Acerto.Infra.csproj" />
   </ItemGroup>
 
 </Project>
