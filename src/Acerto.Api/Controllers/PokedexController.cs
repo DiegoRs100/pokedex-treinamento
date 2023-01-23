@@ -4,6 +4,7 @@ using Acerto.Business.Entities;
 using Acerto.Business.Services;
 using Acerto.Api.Models;
 using AutoMapper;
+using Acerto.Business.Core.Notifications;
 
 namespace Acerto.Api.Controllers
 {
@@ -12,11 +13,13 @@ namespace Acerto.Api.Controllers
     {
         private readonly IPokedexService _pokedexService;
         private readonly IMapper _mapper;
+        private readonly INotifier _notifier;
 
-        public PokedexController(IPokedexService pokedexService, IMapper mapper)
+        public PokedexController(IPokedexService pokedexService, IMapper mapper, INotifier notifier)
         {
             _pokedexService = pokedexService;
             _mapper = mapper;
+            _notifier = notifier;
         }
 
         [HttpPost]
@@ -41,7 +44,7 @@ namespace Acerto.Api.Controllers
             return NoContent();
         }
 
-        [HttpDelete("{pokemonId:guid}")] // http:acerto/pokedex/guyufi-fsdf-fsdf-fsdfsd
+        [HttpDelete("{pokemonId:guid}")]
         [SwaggerOperation("Remover pokémon.")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task<IActionResult> DeletePokemon(Guid pokemonId)

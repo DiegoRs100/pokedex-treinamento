@@ -1,14 +1,17 @@
-﻿using Acerto.Business.Entities;
+﻿using Acerto.Business.Core.Notifications;
+using Acerto.Business.Entities;
 using Acerto.Business.Repositories;
 
 namespace Acerto.Business.Services
 {
     public class PokedexService : IPokedexService
     {
+        private readonly INotifier _notifier;
         private readonly IPokemonRepository _pokemonRepository;
 
-        public PokedexService(IPokemonRepository pokemonRepository)
+        public PokedexService(IPokemonRepository pokemonRepository, INotifier notifier)
         {
+            _notifier = notifier;
             _pokemonRepository = pokemonRepository;
         }
 
@@ -18,7 +21,7 @@ namespace Acerto.Business.Services
 
             if (!validation.IsValid)
             {
-                // Noticar um erro para o meu usuário
+                _notifier.Notify(validation);
                 return null;
             }
 
@@ -26,7 +29,7 @@ namespace Acerto.Business.Services
 
             if (registredPokemon != null)
             {
-                // Notificar a inconsistência para o meu usuário
+                _notifier.Notify("Já existem um pokémon cadastrado com esse nome.");
                 return null;
             }
 
@@ -41,7 +44,7 @@ namespace Acerto.Business.Services
 
             if (!validation.IsValid)
             {
-                // Noticar um erro para o meu usuário
+                _notifier.Notify(validation);
                 return;
             }
 
@@ -49,7 +52,7 @@ namespace Acerto.Business.Services
 
             if (!hasPokemon)
             {
-                // Noticar um erro para o meu usuário
+                _notifier.Notify("Não foi possível encontrar o pokémon informado.");
                 return;
             }
 
@@ -57,7 +60,7 @@ namespace Acerto.Business.Services
 
             if (registredPokemon != null && registredPokemon.Id != pokemon.Id)
             {
-                // Notificar a inconsistência para o meu usuário
+                _notifier.Notify("Não é possível alterar o nome desse pokémon pois já existe um outro cadastro com o mesmo nome.");
                 return;
             }
 
@@ -70,7 +73,7 @@ namespace Acerto.Business.Services
 
             if (!hasPokemon)
             {
-                // Noticar um erro para o meu usuário
+                _notifier.Notify("Não foi possível encontrar o pokémon informado.");
                 return;
             }
 
