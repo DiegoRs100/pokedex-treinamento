@@ -9,7 +9,7 @@ namespace Acerto.Business.Repositories
         void Delete(Guid pokemonId);
 
         Task<bool> HasPokemonAsync(Guid pokemonId);
-        Task<Pokemon> GetByIdAsync(Guid pokemonId);
+        Task<Pokemon?> GetByIdAsync(Guid pokemonId);
         Task<Pokemon> GetByNameAsync(string name);
         Task<IEnumerable<Pokemon>> FindAsync();
     }
