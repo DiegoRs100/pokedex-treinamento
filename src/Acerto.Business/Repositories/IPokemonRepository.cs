@@ -1,4 +1,5 @@
 ﻿using Acerto.Business.Core;
+using Acerto.Business.Core.Pagination;
 using Acerto.Business.Entities;
 using Acerto.Business.Queries;
 
@@ -13,6 +14,6 @@ namespace Acerto.Business.Repositories
         Task<bool> HasPokemonAsync(Guid pokemonId);
         Task<Pokemon?> GetByIdAsync(Guid pokemonId);
         Task<Pokemon?> GetByNameAsync(string name);
-        Task<IEnumerable<Pokemon>> FindAsync(FindPokemonQuery query);
+        Task<PagedList<Pokemon>> FindAsync(FindPokemonQuery query);
     }
 }

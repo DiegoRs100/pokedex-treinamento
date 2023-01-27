@@ -6,9 +6,12 @@ using Acerto.Api.Models;
 using AutoMapper;
 using Acerto.Business.Queries;
 using Acerto.Business.Repositories;
+using Acerto.Business.Core.Pagination;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Acerto.Api.Controllers
 {
+    [Authorize]
     [Route("pokedex")]
     public class PokedexController : ControllerBase
     {
@@ -72,14 +75,12 @@ namespace Acerto.Api.Controllers
 
         [HttpGet("find")]
         [SwaggerOperation("Listar pokémons.")]
-        [ProducesResponseType(typeof(IEnumerable<Pokemon>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(PagedList<Pokemon>), StatusCodes.Status200OK)]
         public async Task<IActionResult> FindPokemon(FindPokemonQuery query)
         {
             var pokemons = await _pokemonRepository.FindAsync(query);
 
-            HttpContext.Response.Headers.Add("X-Total-Count", pokemons.Count().ToString());
-
-            var result = _mapper.Map<IEnumerable<PokemonModel>>(pokemons);
+            var result = _mapper.Map<PagedList<PokemonModel>>(pokemons);
             return Ok(result);
         }
     }

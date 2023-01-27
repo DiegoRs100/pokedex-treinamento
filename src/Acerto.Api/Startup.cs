@@ -17,6 +17,7 @@ namespace Acerto.Api
 
         public void ConfigureServices()
         {
+            _services.AddAuthenticationConfig(_configuration);
             _services.AddControllers();
             _services.AddEndpointsApiExplorer();
             _services.AddSwaggerGen(options => options.EnableAnnotations());
