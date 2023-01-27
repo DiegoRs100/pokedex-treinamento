@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33110.190
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Acerto.Api", "src\Acerto.Api\Acerto.Api.csproj", "{38B89A50-E705-4D2B-9156-B3B61C23EF11}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Acerto.Api", "src\Acerto.Api\Acerto.Api.csproj", "{38B89A50-E705-4D2B-9156-B3B61C23EF11}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Acerto.Business", "src\Acerto.Business\Acerto.Business.csproj", "{ED072D92-042E-434E-B331-E8FDBF866654}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Acerto.Business", "src\Acerto.Business\Acerto.Business.csproj", "{ED072D92-042E-434E-B331-E8FDBF866654}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Acerto.Infra", "src\Acerto.Infra\Acerto.Infra.csproj", "{429C5344-CF69-4DC0-B234-11ADF25A99F8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Acerto.Infra", "src\Acerto.Infra\Acerto.Infra.csproj", "{429C5344-CF69-4DC0-B234-11ADF25A99F8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

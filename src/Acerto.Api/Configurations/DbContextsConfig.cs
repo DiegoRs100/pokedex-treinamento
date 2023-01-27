@@ -1,4 +1,5 @@
 ﻿using Acerto.Infra;
+using Acerto.Infra.Interceptors;
 using Microsoft.EntityFrameworkCore;
 
 namespace Acerto.Api.Configurations
@@ -15,6 +16,8 @@ namespace Acerto.Api.Configurations
                 {
                     sqlOptions.EnableRetryOnFailure(4, TimeSpan.FromSeconds(20), null);
                 });
+
+                options.AddInterceptors(new EfMetadataInterceptor());
             });
 
             return services;

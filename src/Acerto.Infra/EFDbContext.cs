@@ -1,5 +1,4 @@
 ﻿using Acerto.Business.Entities;
-using Acerto.Infra.Mappings;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;

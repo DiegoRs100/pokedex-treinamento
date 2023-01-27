@@ -34,6 +34,7 @@ namespace Acerto.Business.Services
             }
 
             await _pokemonRepository.AddAsync(pokemon);
+            await _pokemonRepository.CommitAsync();
 
             return pokemon.Id;
         }
@@ -65,6 +66,7 @@ namespace Acerto.Business.Services
             }
 
             _pokemonRepository.Update(pokemon);
+            await _pokemonRepository.CommitAsync();
         }
 
         public async Task DeletePokemonAsync(Guid pokemonId)
@@ -78,6 +80,7 @@ namespace Acerto.Business.Services
             }
 
             _pokemonRepository.Delete(pokemonId);
+            await _pokemonRepository.CommitAsync();
         }
     }
 }

@@ -4,7 +4,8 @@ using Acerto.Business.Entities;
 using Acerto.Business.Services;
 using Acerto.Api.Models;
 using AutoMapper;
-using Acerto.Business.Core.Notifications;
+using Acerto.Business.Queries;
+using Acerto.Business.Repositories;
 
 namespace Acerto.Api.Controllers
 {
@@ -13,13 +14,15 @@ namespace Acerto.Api.Controllers
     {
         private readonly IPokedexService _pokedexService;
         private readonly IMapper _mapper;
-        private readonly INotifier _notifier;
+        private readonly IPokemonRepository _pokemonRepository;
 
-        public PokedexController(IPokedexService pokedexService, IMapper mapper, INotifier notifier)
+        public PokedexController(IPokedexService pokedexService, 
+                                 IMapper mapper,
+                                 IPokemonRepository pokemonRepository)
         {
             _pokedexService = pokedexService;
+            _pokemonRepository = pokemonRepository;
             _mapper = mapper;
-            _notifier = notifier;
         }
 
         [HttpPost]
@@ -58,15 +61,26 @@ namespace Acerto.Api.Controllers
         [ProducesResponseType(typeof(Pokemon), StatusCodes.Status200OK)]
         public async Task<IActionResult> GetPokemonById(Guid pokemonId)
         {
-            return Ok(new Pokemon("", Guid.NewGuid(), Business.Enums.Gender.All, 1, 1, 1, 1));
+            var pokemon = await _pokemonRepository.GetByIdAsync(pokemonId);
+
+            if (pokemon == null)
+                return NotFound();
+
+            var result = _mapper.Map<PokemonModel>(pokemon);
+            return Ok(result);
         }
 
         [HttpGet("find")]
         [SwaggerOperation("Listar pokémons.")]
         [ProducesResponseType(typeof(IEnumerable<Pokemon>), StatusCodes.Status200OK)]
-        public async Task<IActionResult> FindPokemon()
+        public async Task<IActionResult> FindPokemon(FindPokemonQuery query)
         {
-            return Ok();
+            var pokemons = await _pokemonRepository.FindAsync(query);
+
+            HttpContext.Response.Headers.Add("X-Total-Count", pokemons.Count().ToString());
+
+            var result = _mapper.Map<IEnumerable<PokemonModel>>(pokemons);
+            return Ok(result);
         }
     }
 }

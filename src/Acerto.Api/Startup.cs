@@ -1,6 +1,6 @@
 ﻿using Acerto.Api.Configurations;
+using Acerto.Api.Middlewares;
 using Acerto.Business.Core.Notifications;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace Acerto.Api
 {
@@ -31,6 +31,8 @@ namespace Acerto.Api
         {
             app.UseSwagger();
             app.UseSwaggerUI();
+
+            app.UseMiddleware<ExceptionMiddleware>();
 
             app.UseHttpsRedirection();
             app.UseRouting();
