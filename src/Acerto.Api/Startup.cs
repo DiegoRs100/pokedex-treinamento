@@ -20,7 +20,7 @@ namespace Acerto.Api
             _services.AddAuthenticationConfig(_configuration);
             _services.AddControllers();
             _services.AddEndpointsApiExplorer();
-            _services.AddSwaggerGen(options => options.EnableAnnotations());
+            _services.AddSwagger();
             _services.AddSmartNotification();
             _services.AddServices();
             _services.AddRepositories();
